@@ -2,19 +2,27 @@ package com.braceyourself.vision;
 
 import com.braceyourself.utility.MatConverter;
 import org.opencv.core.Mat;
+import org.opencv.dnn.Dnn;
+import org.opencv.dnn.Net;
 import org.opencv.videoio.VideoCapture;
+
+import java.awt.image.BufferedImage;
+
+import static org.opencv.dnn.Dnn.blobFromImage;
 
 public class VideoPanelManager implements Runnable {
 
     private VideoCapture videoCapture;
     private VideoPanel videoPanel;
-    private final int REFRESH_RATE = 1000/60; // Milliseconds per refresh
+    private Net net;
+    private final int REFRESH_RATE = 1000/30; // Milliseconds per refresh
     private boolean isRunning = false;
     private MatConverter matConverter;
 
-    public VideoPanelManager(VideoCapture vc, VideoPanel vp) {
+    public VideoPanelManager(VideoCapture vc, VideoPanel vp, Net net) {
         this.videoCapture = vc;
         this.videoPanel = vp;
+        this.net = net;
     }
 
     public void run(){
@@ -28,8 +36,14 @@ public class VideoPanelManager implements Runnable {
                     Thread.sleep(REFRESH_RATE);
 
                     Mat n = new Mat();
-
                     videoCapture.read(n);
+
+                    Mat b = blobFromImage(n);
+//                    net.setInput(b);
+//
+//                    Mat o = net.forward();
+
+
 
                     videoPanel.setFrame(MatConverter.getBufferedImage(n));
                     videoPanel.repaint();

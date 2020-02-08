@@ -1,5 +1,6 @@
 package com.braceyourself.vision;
 
+import com.braceyourself.utility.FileManager;
 import org.opencv.core.Mat;
 import org.opencv.dnn.Net;
 import org.opencv.videoio.VideoCapture;
@@ -8,8 +9,8 @@ import static org.opencv.dnn.Dnn.readNetFromCaffe;
 
 public class VisionMain {
 
-    public final String protoFile = "pose/mpi/pose_deploy_linevec_faster_4_stages.prototxt";
-    public final String weightsFile = "pose/mpi/pose_iter_160000.caffemodel";
+    public final String protoFile = "models\\pose_deploy_linevec.prototxt";
+    public final String weightsFile = "models\\pose_iter_440000.caffemodel";
 
     public VideoCapture videoCapture;
     public VideoPanel videoPanel;
@@ -20,7 +21,7 @@ public class VisionMain {
     public VisionMain(VideoPanel vp) {
         this.videoPanel = vp;
         System.out.println("Reading proto and weights file . . .");
-        //net = readNetFromCaffe(protoFile, weightsFile);
+        net = readNetFromCaffe(FileManager.getPath() + protoFile, FileManager.getPath() + weightsFile);
         System.out.println("Proto and Weights file loaded successfully!");
 
         System.out.println("Setting up VideoCapture webcam stream . . .");
@@ -40,7 +41,7 @@ public class VisionMain {
     }
 
     public void startVideoPanelManager() {
-        vPM = new VideoPanelManager(this.videoCapture, this.videoPanel);
+        vPM = new VideoPanelManager(this.videoCapture, this.videoPanel, this.net);
         new Thread(vPM).start();
 
     }
