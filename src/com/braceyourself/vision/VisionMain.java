@@ -12,10 +12,13 @@ public class VisionMain {
     public final String weightsFile = "pose/mpi/pose_iter_160000.caffemodel";
 
     public VideoCapture videoCapture;
+    public VideoPanel videoPanel;
+    public VideoPanelManager vPM;
 
     public Net net;
 
-    public VisionMain() {
+    public VisionMain(VideoPanel vp) {
+        this.videoPanel = vp;
         System.out.println("Reading proto and weights file . . .");
         //net = readNetFromCaffe(protoFile, weightsFile);
         System.out.println("Proto and Weights file loaded successfully!");
@@ -26,11 +29,19 @@ public class VisionMain {
             System.out.println("FATAL: Failed to setup webcam stream!");
         } else {
             System.out.println("Found webcam!");
+
+            startVideoPanelManager();
         }
     }
 
     public void ProcessFrame(Mat frame) { // Frame must be imported through blobFromImage(frame, 1.0 / 255, Size(inWidth, inHeight), Scalar(0, 0, 0), false, false);
         net.setInput(frame);
         Mat output = net.forward();
+    }
+
+    public void startVideoPanelManager() {
+        vPM = new VideoPanelManager(this.videoCapture, this.videoPanel);
+        new Thread(vPM).start();
+
     }
 }

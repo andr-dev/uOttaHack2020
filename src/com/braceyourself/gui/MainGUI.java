@@ -1,9 +1,9 @@
 package com.braceyourself.gui;
 
 import com.braceyourself.utility.FileManager;
+import com.braceyourself.vision.VideoPanel;
 import com.braceyourself.vision.VisionMain;
 import org.opencv.core.Core;
-import org.opencv.video.Video;
 
 import javax.swing.*;
 
@@ -21,8 +21,10 @@ public class MainGUI extends JFrame {
     public MainGUI (String title) {
         super(title);
 
+        videoPanel = new VideoPanel();
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setContentPane(masterPanel);
+        this.setContentPane(videoPanel);
         this.pack();
     }
 
@@ -33,10 +35,8 @@ public class MainGUI extends JFrame {
         mainGUI.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         mainGUI.setVisible(true);
 
-        visionMain = new VisionMain();
-        videoPanel = new VideoPanel();
-
         fileManager = new FileManager();
+        visionMain = new VisionMain(videoPanel);
 
     }
 }
