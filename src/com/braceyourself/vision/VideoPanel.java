@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 public class VideoPanel extends JPanel {
     private BufferedImage frame;
-    private int frameCounter = 0;
+    private int frameCounter = 1;
     private boolean videoStreamState = false;
 
     public VideoPanel () {
@@ -25,7 +25,7 @@ public class VideoPanel extends JPanel {
                 System.out.println("FATAL: Frame is null!");
             }
 
-            g.drawImage(this.frame, 10, 10, this.frame.getWidth(), this.frame.getHeight(), null);
+            g.drawImage(this.frame, 0, 0, this.frame.getWidth(), this.frame.getHeight(), null);
             g.setFont(new Font("arial", 2, 24));
             g.setColor(Color.WHITE);
             g.drawString("Frame #" + frameCounter, 50, 50);

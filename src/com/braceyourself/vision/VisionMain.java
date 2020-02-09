@@ -18,6 +18,9 @@ public class VisionMain {
 
     public Net net;
 
+    private final int WEBCAM_WIDTH = 720;
+    private final int WEBCAM_HEIGHT = 480;
+
     public VisionMain(VideoPanel vp) {
         this.videoPanel = vp;
         System.out.println("Reading proto and weights file . . .");
@@ -26,6 +29,8 @@ public class VisionMain {
 
         System.out.println("Setting up VideoCapture webcam stream . . .");
         videoCapture = new VideoCapture(0);
+        videoCapture.set(3, WEBCAM_WIDTH);
+        videoCapture.set(4, WEBCAM_HEIGHT);
         if (!videoCapture.isOpened()) {
             System.out.println("FATAL: Failed to setup webcam stream!");
         } else {
