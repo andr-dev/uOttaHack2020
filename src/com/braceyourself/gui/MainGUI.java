@@ -38,12 +38,12 @@ public class MainGUI extends JFrame {
         masterPanel.add(videoPanel);
 
         JButton test = new JButton();
-        test.setBounds(768, 32, 128, 32);
+        test.setBounds(768, 32, 192, 32);
         test.setText("Sync");
         test.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                sync();
             }
         });
 
@@ -64,6 +64,13 @@ public class MainGUI extends JFrame {
         mainGUI.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
         visionMain = new VisionMain(videoPanel);
+    }
 
+    public void sync() {
+        VisionMain.vPM.sync();
+    }
+
+    public void toggle() {
+        VisionMain.vPM.toggle();
     }
 }

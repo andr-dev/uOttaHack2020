@@ -36,21 +36,21 @@ public class MainTaskbar {
         menuToggle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                toggle();
             }
         });
 
         menuOpen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                openWindow();
             }
         });
 
         menuSync.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                sync();
             }
         });
 
@@ -79,5 +79,19 @@ public class MainTaskbar {
     protected static Image createIcon(String path, String description) {
         System.out.println(FileManager.getPath() + path);
         return (new ImageIcon(FileManager.getPath() + path, description)).getImage();
+    }
+
+    private static void openWindow() {
+        mainGUI.setVisible(true);
+        mainGUI.toFront();
+        mainGUI.requestFocus();
+    }
+
+    private static void sync() {
+        mainGUI.sync();
+    }
+
+    private static void toggle() {
+        mainGUI.toggle();
     }
 }

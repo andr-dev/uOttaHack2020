@@ -26,7 +26,7 @@ public class VideoPanel extends JPanel {
             }
 
             g.drawImage(this.frame, 0, 0, this.frame.getWidth(), this.frame.getHeight(), null);
-            g.setFont(new Font("arial", 2, 24));
+            g.setFont(new Font("arial", 2, 20));
             g.setColor(Color.WHITE);
             g.drawString("Frame #" + frameCounter, 50, 50);
 

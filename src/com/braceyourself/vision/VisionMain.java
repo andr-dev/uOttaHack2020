@@ -14,7 +14,7 @@ public class VisionMain {
 
     public VideoCapture videoCapture;
     public VideoPanel videoPanel;
-    public VideoPanelManager vPM;
+    public static VideoPanelManager vPM;
 
     public Net net;
 

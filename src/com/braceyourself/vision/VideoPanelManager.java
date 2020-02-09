@@ -8,6 +8,7 @@ import org.opencv.dnn.Net;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
+import org.opencv.video.Video;
 import org.opencv.videoio.VideoCapture;
 
 import javax.swing.*;
@@ -32,6 +33,9 @@ public class VideoPanelManager implements Runnable {
 
     private int width = 0;
     private int slouchCounter = 0;
+
+    private final int WEBCAM_WIDTH = 720;
+    private final int WEBCAM_HEIGHT = 480;
 
     public VideoPanelManager(VideoCapture vc, VideoPanel vp, Net net) {
         this.videoCapture = vc;
@@ -158,6 +162,7 @@ public class VideoPanelManager implements Runnable {
                 }
 
             }
+            videoCapture.release();
         } else {
             return; // Should be enough to stop the thread :)))
         }
@@ -166,5 +171,20 @@ public class VideoPanelManager implements Runnable {
     public void stop() {
         this.isRunning = false;
         this.videoPanel.setVideoStreamState(false);
+    }
+
+    public void sync() {
+        this.width = 0;
+    }
+
+    public void toggle() {
+        if (isRunning) {
+            isRunning = false;
+        } else {
+            isRunning = true;
+            videoCapture = new VideoCapture(0);
+            videoCapture.set(3, WEBCAM_WIDTH);
+            videoCapture.set(4, WEBCAM_HEIGHT);
+        }
     }
 }
