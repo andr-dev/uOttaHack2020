@@ -10,8 +10,11 @@ import java.awt.event.ActionListener;
 public class MainTaskbar {
 
     public static TrayIcon trayIcon;
+    public static MainGUI mainGUI;
 
-    public MainTaskbar () {
+    public MainTaskbar (MainGUI gui) {
+        this.mainGUI = gui;
+
         show();
     }
 
@@ -26,9 +29,25 @@ public class MainTaskbar {
         final PopupMenu menu = new PopupMenu();
 
         MenuItem menuToggle = new MenuItem("Enable / Disable");
+        MenuItem menuOpen = new MenuItem("Open");
+        MenuItem menuSync = new MenuItem("Quick Sync");
         MenuItem menuExit = new MenuItem("Exit");
 
         menuToggle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        menuOpen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+            }
+        });
+
+        menuSync.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
@@ -45,6 +64,8 @@ public class MainTaskbar {
         trayIcon.setPopupMenu(menu);
 
         menu.add(menuToggle);
+        menu.add(menuOpen);
+        menu.add(menuSync);
         menu.addSeparator();
         menu.add(menuExit);
 
@@ -56,6 +77,7 @@ public class MainTaskbar {
     }
 
     protected static Image createIcon(String path, String description) {
+        System.out.println(FileManager.getPath() + path);
         return (new ImageIcon(FileManager.getPath() + path, description)).getImage();
     }
 }

@@ -10,6 +10,7 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.videoio.VideoCapture;
 
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,9 @@ public class VideoPanelManager implements Runnable {
     private final int REFRESH_RATE = 1000/30; // Milliseconds per refresh
     private boolean isRunning = false;
     private MatConverter matConverter;
+
+    private int width = 0;
+    private int slouchCounter = 0;
 
     public VideoPanelManager(VideoCapture vc, VideoPanel vp, Net net) {
         this.videoCapture = vc;
@@ -113,6 +117,23 @@ public class VideoPanelManager implements Runnable {
 
                     for (Rect rect : faceDetections.toArray()) {
                         rectangle(imager, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0));
+                    }
+
+                    if (width == 0) {
+                        this.width = (int) (faceDetections.toArray()[0].width * 1.1);
+                    }
+
+                    if (faceDetections.toArray().length != 0 && faceDetections.toArray()[0].width > this.width) {
+                        slouchCounter++;
+                    } else {
+                        if (slouchCounter > 0) {
+                            slouchCounter--;
+                        }
+                    }
+
+                    if (slouchCounter > 10) {
+                        JOptionPane.showMessageDialog(null, "Fix your posture :))", "Ouch! DeSlouch", JOptionPane.WARNING_MESSAGE);
+                        slouchCounter = 0;
                     }
 
 //                    for (Rect rect : upperBodyDetections.toArray()) {

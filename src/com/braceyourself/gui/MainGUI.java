@@ -7,6 +7,8 @@ import org.opencv.core.Core;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainGUI extends JFrame {
 
@@ -23,7 +25,7 @@ public class MainGUI extends JFrame {
     public MainGUI (String title) {
         super(title);
 
-        mainTaskbar = new MainTaskbar();
+        mainTaskbar = new MainTaskbar(this);
 
         masterPanel = new JPanel();
         masterPanel.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -35,6 +37,18 @@ public class MainGUI extends JFrame {
 
         masterPanel.add(videoPanel);
 
+        JButton test = new JButton();
+        test.setBounds(768, 32, 128, 32);
+        test.setText("Sync");
+        test.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+            }
+        });
+
+        masterPanel.add(test);
+
         this.setContentPane(masterPanel);
         this.setResizable(false);
         this.pack();
@@ -44,11 +58,11 @@ public class MainGUI extends JFrame {
     public static void main (String[] args) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
+        fileManager = new FileManager();
+
         JFrame mainGUI = new MainGUI("Posture App");
         mainGUI.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        mainGUI.setVisible(true);
 
-        fileManager = new FileManager();
         visionMain = new VisionMain(videoPanel);
 
     }
