@@ -2,7 +2,12 @@ package com.braceyourself.gui;
 
 import javax.swing.*;
 import java.awt.*;
+<<<<<<< HEAD
 import java.awt.event.*;
+=======
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+>>>>>>> 7275681dbc5d66ff0b521d135c1c600758215f80
 
 public class MainGUI extends JFrame {
 
@@ -16,7 +21,7 @@ public class MainGUI extends JFrame {
     public MainGUI (String title) {
         super(title);
 
-        mainTaskbar = new MainTaskbar();
+        mainTaskbar = new MainTaskbar(this);
 
         JPanel video = new JPanel();
         video.setSize(720, 512);
@@ -43,6 +48,18 @@ public class MainGUI extends JFrame {
         masterPanel.add(power);
         masterPanel.add(video);
 
+        JButton test = new JButton();
+        test.setBounds(768, 32, 192, 32);
+        test.setText("Sync");
+        test.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                sync();
+            }
+        });
+
+        masterPanel.add(test);
+
         this.setContentPane(masterPanel);
         this.setResizable(false);
         this.pack();
@@ -51,9 +68,22 @@ public class MainGUI extends JFrame {
 
     public static void main (String[] args) {
 
+        fileManager = new FileManager();
+
         JFrame mainGUI = new MainGUI("Posture App");
         mainGUI.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        mainGUI.setVisible(true);
 
+<<<<<<< HEAD
+=======
+        visionMain = new VisionMain(videoPanel);
+    }
+
+    public void sync() {
+        VisionMain.vPM.sync();
+    }
+
+    public void toggle() {
+        VisionMain.vPM.toggle();
+>>>>>>> 7275681dbc5d66ff0b521d135c1c600758215f80
     }
 }
