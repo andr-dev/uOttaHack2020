@@ -1,7 +1,5 @@
 package com.braceyourself.gui;
 
-import com.braceyourself.utility.FileManager;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -56,6 +54,6 @@ public class MainTaskbar {
     }
 
     protected static Image createIcon(String path, String description) {
-        return (new ImageIcon(FileManager.getPath() + path, description)).getImage();
+        return (new ImageIcon("/hello", description)).getImage();
     }
 }

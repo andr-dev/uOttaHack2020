@@ -1,12 +1,8 @@
 package com.braceyourself.gui;
 
-import com.braceyourself.utility.FileManager;
-import com.braceyourself.vision.VideoPanel;
-import com.braceyourself.vision.VisionMain;
-import org.opencv.core.Core;
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class MainGUI extends JFrame {
 
@@ -15,9 +11,6 @@ public class MainGUI extends JFrame {
     private static final int WINDOW_WIDTH = 1024;
     private static final int WINDOW_HEIGHT = 512;
 
-    private static VisionMain visionMain;
-    private static FileManager fileManager;
-    private static VideoPanel videoPanel;
     private static MainTaskbar mainTaskbar;
 
     public MainGUI (String title) {
@@ -25,15 +18,30 @@ public class MainGUI extends JFrame {
 
         mainTaskbar = new MainTaskbar();
 
+        JPanel video = new JPanel();
+        video.setSize(720, 512);
+        video.setBackground(Color.GREEN);
+
+        JButton sync = new JButton();
+        sync.setBounds(784, 120, 176, 40);
+        sync.setBackground(Color.RED);
+        sync.setText("Synchronize");
+
+        JButton power = new JButton();
+        power.setBounds(822, 220, 100, 100);
+        sync.setBackground(Color.RED);
+        power.setText("On/Off");
+
         masterPanel = new JPanel();
         masterPanel.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         masterPanel.setLayout(null);
         masterPanel.setBackground(new Color(200, 200, 200));
 
-        videoPanel = new VideoPanel();
-        videoPanel.setSize(720, 512);
 
-        masterPanel.add(videoPanel);
+
+        masterPanel.add(sync);
+        masterPanel.add(power);
+        masterPanel.add(video);
 
         this.setContentPane(masterPanel);
         this.setResizable(false);
@@ -42,14 +50,10 @@ public class MainGUI extends JFrame {
     }
 
     public static void main (String[] args) {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
         JFrame mainGUI = new MainGUI("Posture App");
         mainGUI.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         mainGUI.setVisible(true);
-
-        fileManager = new FileManager();
-        visionMain = new VisionMain(videoPanel);
 
     }
 }
