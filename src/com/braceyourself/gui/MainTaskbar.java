@@ -75,12 +75,9 @@ public class MainTaskbar {
     }
 
     protected static Image createIcon(String path, String description) {
-<<<<<<< HEAD
         return (new ImageIcon("/hello", description)).getImage();
-=======
         System.out.println(FileManager.getPath() + path);
         return (new ImageIcon(FileManager.getPath() + path, description)).getImage();
->>>>>>> 7275681dbc5d66ff0b521d135c1c600758215f80
     }
 
     private static void openWindow() {

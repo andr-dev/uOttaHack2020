@@ -2,12 +2,9 @@ package com.braceyourself.gui;
 
 import javax.swing.*;
 import java.awt.*;
-<<<<<<< HEAD
 import java.awt.event.*;
-=======
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
->>>>>>> 7275681dbc5d66ff0b521d135c1c600758215f80
 
 public class MainGUI extends JFrame {
 
@@ -73,8 +70,6 @@ public class MainGUI extends JFrame {
         JFrame mainGUI = new MainGUI("Posture App");
         mainGUI.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-<<<<<<< HEAD
-=======
         visionMain = new VisionMain(videoPanel);
     }
 
@@ -84,6 +79,5 @@ public class MainGUI extends JFrame {
 
     public void toggle() {
         VisionMain.vPM.toggle();
->>>>>>> 7275681dbc5d66ff0b521d135c1c600758215f80
     }
 }
